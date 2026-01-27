@@ -1,0 +1,13 @@
+:root {
+  --c-text: #2b2c42; /* body text */
+  --c-text-strong: #333549; /* headings */
+  --c-text-muted: #616375; /* muted */ 
+  --c-surface: #ffffff; /* cards/surfaces */
+  --c-surface-soft: #f8f6f6; /* soft panels */
+  --c-border: #e9e9ed; /* borders/dividers */
+  --c-border-strong: #c4dcfc; /* light accent border */
+  --c-primary: #3c84c4; /* main blue */
+  --c-primary-hover: #3474b4; /* darker blue */
+  --c-primary-soft: #54acdc; /* bright accent */
+  --c-shadow: rgba(51, 53, 73, 0.25); /* tinted shadow */
+}
