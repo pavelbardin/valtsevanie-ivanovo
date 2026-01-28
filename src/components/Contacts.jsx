@@ -1,9 +1,5 @@
-import {
-  FaEnvelope,
-  FaPhoneAlt,
-  FaTelegramPlane,
-  FaWhatsapp,
-} from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { FaEnvelope, FaPhoneAlt, FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
 
 const PHONE_NUMBER = "8(4932)29-59-97";
 const PHONE_HREF = "tel:+74932295997";
@@ -20,8 +16,19 @@ const TELEGRAM_ARIA_LABEL = "Telegram";
 const MAP_TITLE = "Map";
 const MAP_SRC =
   "https://yandex.ru/map-widget/v1/?text=%D0%B3.%20%D0%98%D0%B2%D0%B0%D0%BD%D0%BE%D0%B2%D0%BE%2C%20%D0%A2%D0%BE%D1%80%D1%84%D1%8F%D0%BD%D0%BE%D0%B9%20%D0%BF%D0%B5%D1%80%D0%B5%D1%83%D0%BB%D0%BE%D0%BA%2C%20%D0%B4.%2065";
+const MAP_BUTTON_TEXT = "Показать карту";
 
 const Contacts = () => {
+  const [isMapLoaded, setIsMapLoaded] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const media = window.matchMedia("(min-width: 1024px)");
+    if (media.matches) {
+      setIsMapLoaded(true);
+    }
+  }, []);
+
   return (
     <section id="contacts" className="py-12 sm:py-14 xl:py-16">
       <div className="mx-auto grid w-full max-w-[1400px] grid-cols-1 gap-8 px-4 sm:px-6 xl:grid-cols-2 xl:gap-12">
@@ -71,17 +78,28 @@ const Contacts = () => {
             </a>
           </div>
         </div>
-        <div className="h-[280px] w-full overflow-hidden rounded-md sm:h-[340px] md:h-[380px] xl:h-[420px]">
-          <iframe
-            title={MAP_TITLE}
-            src={MAP_SRC}
-            width="100%"
-            height="100%"
-            frameBorder="0"
-            allowFullScreen
-            loading="lazy"
-            className="block"
-          />
+        <div className="relative h-[280px] w-full overflow-hidden rounded-md sm:h-[340px] md:h-[380px] xl:h-[420px]">
+          {isMapLoaded ? (
+            <iframe
+              title={MAP_TITLE}
+              src={MAP_SRC}
+              width="100%"
+              height="100%"
+              frameBorder="0"
+              allowFullScreen
+              loading="lazy"
+              className="block"
+            />
+          ) : (
+            <button
+              type="button"
+              onClick={() => setIsMapLoaded(true)}
+              className="flex h-full w-full items-center justify-center bg-[color:var(--c-surface-soft)] text-[16px] font-medium text-[color:var(--c-text-strong)] transition hover:bg-[color:var(--c-surface)]"
+              style={{ fontFamily: "Roboto, sans-serif" }}
+            >
+              {MAP_BUTTON_TEXT}
+            </button>
+          )}
         </div>
       </div>
     </section>
