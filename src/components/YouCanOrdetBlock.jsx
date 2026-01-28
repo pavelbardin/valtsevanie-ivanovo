@@ -2,8 +2,12 @@ import { useModal } from "./useModal";
 import SectionTitle from "./ui/SectionTitle";
 
 const SECTION_TITLE = "У нас можно заказать";
-const CARD_TITLE = "Листовое вальцевание металла";
+const CARD_TITLE = "Продукт №1";
+const CARD_TITLE2 = "Продукт №2";
+const CARD_TITLE3 = "Продукт №3";
 const CARD_PRICE_PLACEHOLDER = "Цена от ...";
+const CARD_PRICE_PLACEHOLDER2= "Цена от ...";
+const CARD_PRICE_PLACEHOLDER3 = "Цена от ...";
 const BUTTON_CALCULATE_PRICE = "Рассчитать цену";
 const BUTTON_ASK_QUESTION = "Задать вопрос";
 
@@ -11,17 +15,17 @@ const cards = [
   {
     title: CARD_TITLE,
     price: CARD_PRICE_PLACEHOLDER,
-    img: "https://picsum.photos/seed/metal-card-1/360/400",
+    img: "/Order/1.png",
   },
   {
-    title: CARD_TITLE,
-    price: CARD_PRICE_PLACEHOLDER,
-    img: "https://picsum.photos/seed/metal-card-2/360/400",
+    title: CARD_TITLE2,
+    price: CARD_PRICE_PLACEHOLDER2,
+    img: "/Order/2.png",
   },
   {
-    title: CARD_TITLE,
-    price: CARD_PRICE_PLACEHOLDER,
-    img: "https://picsum.photos/seed/metal-card-3/360/400",
+    title: CARD_TITLE3,
+    price: CARD_PRICE_PLACEHOLDER3,
+    img: "/Order/3.png",
   },
 ];
 
@@ -29,7 +33,7 @@ const YouCanOrdetBlock = () => {
   const { open } = useModal();
 
   return (
-    <section id="services" className="py-6 sm:py-6 xl:py-6">
+    <section id="services" className="py-6 sm:py-6 xl:py-6 app-layout" >
       <div className="flex flex-col">
         <SectionTitle
           className="mb-8 xl:mb-10"

@@ -1,30 +1,24 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
-import Lightbox from "yet-another-react-lightbox";
 import SectionTitle from "./ui/SectionTitle";
 
-const TEXT_COLOR = "var(--c-text-strong)";
-const SECTION_TITLE = "Наши работы";
-const SLIDE_IMAGE_URL = "https://picsum.photos/seed/works-"; 
-const SLIDE_COUNT = 10;
+const SECTION_TITLE = "Металлы с которыми мы работаем";
+const SLIDE_IMAGES = ["/slider/1.png", "/slider/2.png", "/slider/3.png", "/slider/4.png","/slider/1.png", "/slider/2.png", "/slider/3.png", "/slider/4.png"];
 const ALT_TEXT_PREFIX = "Работа";
 
 const OurWorks = () => {
   const slides = useMemo(
     () =>
-      Array.from({ length: SLIDE_COUNT }, (_, i) => ({
-        src: `${SLIDE_IMAGE_URL}${i + 1}/720/900`,
+      SLIDE_IMAGES.map((src, i) => ({
+        src,
         alt: `${ALT_TEXT_PREFIX} ${i + 1}`,
       })),
     []
   );
 
-  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
-  const [lightboxIndex, setLightboxIndex] = useState(0);
-
   return (
-    <section className="py-12 sm:py-14 xl:py-16">
+    <section className="py-12 sm:py-14 xl:py-16 px-4">
       <SectionTitle
         className="mb-8 xl:mb-10"
         style={{ fontFamily: "Roboto, sans-serif" }}
@@ -37,84 +31,51 @@ const OurWorks = () => {
           modules={[Navigation]}
           navigation
           loop
-          centeredSlides
-          centeredSlidesBounds
-          slidesPerView={1}
+          slidesPerView="auto"
           spaceBetween={16}
           watchOverflow
-          className="w-full px-14 sm:px-0"
+          className="w-full"
           style={{
-            "--swiper-navigation-color": TEXT_COLOR,
+            "--swiper-navigation-color": '#ffffff',
             "--swiper-navigation-size": "22px",
           }}
-          breakpoints={{
-            0: {
-              slidesPerView: "auto",
-              spaceBetween: 16,
-            },
-            640: {
-              slidesPerView: 1.2,
-              spaceBetween: 16,
-              slidesOffsetBefore: 16,
-              slidesOffsetAfter: 16,
-            },
-            768: {
-              slidesPerView: 2,
-              spaceBetween: 20,
-              slidesOffsetBefore: 20,
-              slidesOffsetAfter: 20,
-            },
-            1024: {
-              slidesPerView: 2.4,
-              spaceBetween: 22,
-              slidesOffsetBefore: 22,
-              slidesOffsetAfter: 22,
-            },
-            1280: {
-              slidesPerView: 3,
-              spaceBetween: 24,
-              slidesOffsetBefore: 24,
-              slidesOffsetAfter: 24,
-            },
-          }}
         >
-          {slides.map((slide, index) => (
+          {slides.map((slide) => (
             <SwiperSlide
               key={slide.src}
-              className="flex justify-center max-[639px]:!w-auto"
+              className="!w-auto flex justify-center"
             >
-              {({ isActive }) => (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setLightboxIndex(index);
-                    setIsLightboxOpen(true);
-                  }}
-                  className={[
-                    "group relative block overflow-hidden rounded-sm bg-[color:var(--c-border)] transition-all duration-300",
-                    isActive ? "scale-100 opacity-100" : "scale-90 opacity-70",
-                  ].join(" ")}
+              <div
+                className="
+                  group
+                  relative
+                  overflow-hidden
+                  rounded-sm
+                  transition
+                  duration-300
+                "
+              >
+                <img
+                  src={slide.src}
+                  alt={slide.alt}
                   draggable={false}
-                >
-                  <img
-                    src={slide.src}
-                    alt={slide.alt}
-                    draggable={false}
-                    loading="lazy"
-                    className="h-[260px] w-[240px] object-cover transition duration-300 group-hover:scale-[1.03] sm:h-[300px] sm:w-[280px] md:h-[340px] md:w-[320px] lg:h-[360px] lg:w-[340px] xl:h-[400px] xl:w-[360px]"
-                  />
-                </button>
-              )}
+                  loading="lazy"
+                  className="
+                    w-[192px] h-[192px]
+                    object-cover
+                    transition
+                    duration-300
+                    group-hover:scale-[1.03]
+                    sm:w-[224px] sm:h-[224px]
+                    md:w-[256px] md:h-[256px]
+                    lg:w-[272px] lg:h-[272px]
+                    xl:w-[288px] xl:h-[288px]
+                  "
+                />
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>
-
-        <Lightbox
-          open={isLightboxOpen}
-          close={() => setIsLightboxOpen(false)}
-          index={lightboxIndex}
-          slides={slides}
-        />
       </div>
     </section>
   );

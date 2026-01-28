@@ -32,6 +32,7 @@ const QABlock = () => {
 
   return (
     <section
+      id="qa"
       className="rounded-md bg-[#f3f3f8] py-8 sm:py-10 xl:py-5"
       style={{
         boxShadow:

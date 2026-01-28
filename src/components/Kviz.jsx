@@ -1,5 +1,7 @@
 import { useMemo, useState } from "react";
 import SectionTitle from "./ui/SectionTitle";
+import { sendForm } from "../api/forms";
+import PrivacyPolicyModal from "./PrivacyPolicyModal";
 
 const TEXT_COLOR = "var(--c-text-strong)";
 
@@ -11,7 +13,7 @@ const BUTTON_NEXT_TEXT = "Далее";
 const BUTTON_SUBMIT_TEXT = "Отправить";
 const BUTTON_SENDING_TEXT = "Отправка...";
 const STATUS_SENDING_TEXT = "Отправка...";
-const STATUS_SUCCESS_TEXT = "Заявка отправлена. Мы скоро свяжемся с вами.";
+const STATUS_SUCCESS_TEXT = "Спасибо, ваша заявка отправлена. Скоро с вами свяжемся.";
 const STATUS_ERROR_NO_KEY_TEXT =
   "Ошибка: ключ Web3Forms не найден (VITE_WEB3FORMS_KEY)";
 const STATUS_ERROR_DEFAULT_TEXT = "Ошибка отправки. Попробуйте позже.";
@@ -87,12 +89,22 @@ const QUIZ_STEPS = [
     fields: [
       {
         name: "name",
-        label: "Ваше имя",
+        label: "Ваше имя *",
         type: "text",
-        placeholder: "Ваше имя",
+        placeholder: "Ваше имя *",
       },
-      { name: "email", label: "Email", type: "email", placeholder: "Email" },
-      { name: "phone", label: "Телефон", type: "tel", placeholder: "Телефон" },
+      {
+        name: "phone",
+        label: "Телефон *",
+        type: "tel",
+        placeholder: "Телефон *",
+      },
+      {
+        name: "email",
+        label: "Email",
+        type: "email",
+        placeholder: "Email (необязательно)",
+      },
     ],
   },
 ];
@@ -189,6 +201,8 @@ const Kviz = () => {
   const [values, setValues] = useState(INITIAL_VALUES);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState({ type: "idle", text: "" });
+  const [isPolicyAccepted, setIsPolicyAccepted] = useState(false);
+  const [isPolicyOpen, setIsPolicyOpen] = useState(false);
 
   const current = steps[stepIndex];
   const isLast = stepIndex === steps.length - 1;
@@ -231,18 +245,12 @@ const Kviz = () => {
   };
 
   const handleSubmit = async () => {
+    if (!isPolicyAccepted) return;
     setIsSubmitting(true);
     setSubmitStatus({ type: "sending", text: STATUS_SENDING_TEXT });
 
     try {
-      const key = import.meta.env.VITE_WEB3FORMS_KEY;
-      if (!key) {
-        setSubmitStatus({ type: "error", text: STATUS_ERROR_NO_KEY_TEXT });
-        return;
-      }
-
       const formData = new FormData();
-      formData.append("access_key", key);
       formData.append("subject", FORM_SUBJECT);
       formData.append("name", values.name);
       formData.append("email", values.email);
@@ -250,22 +258,21 @@ const Kviz = () => {
       formData.append("message", FORM_MESSAGE_TEMPLATE(values));
       formData.append("quiz_payload", JSON.stringify(values));
 
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: formData,
-      });
+      const result = await sendForm(formData);
 
-      const data = await response.json();
-
-      if (response.ok && data.success) {
+      if (result.ok) {
         setSubmitStatus({ type: "success", text: STATUS_SUCCESS_TEXT });
         setStepIndex(0);
         setValues(INITIAL_VALUES);
         window.setTimeout(() => setSubmitStatus({ type: "idle", text: "" }), 3500);
       } else {
+        if (result.error === "missing_key") {
+          setSubmitStatus({ type: "error", text: STATUS_ERROR_NO_KEY_TEXT });
+          return;
+        }
         setSubmitStatus({
           type: "error",
-          text: data?.message ? STATUS_ERROR_WITH_MESSAGE(data.message) : STATUS_ERROR_DEFAULT_TEXT,
+          text: result.error ? STATUS_ERROR_WITH_MESSAGE(result.error) : STATUS_ERROR_DEFAULT_TEXT,
         });
       }
     } catch {
@@ -277,7 +284,7 @@ const Kviz = () => {
 
   return (
     <section
-      className="rounded-md bg-[#f3f3f8] py-3 sm:py-6 xl:py-8"
+      className="rounded-md bg-[#f3f3f8] py-3 px-3 sm:py-6 xl:py-8"
       style={{
         color: TEXT_COLOR,
         boxShadow:
@@ -355,22 +362,42 @@ const Kviz = () => {
               </div>
             )}
             {current.type === "contact" && (
-              <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
-                {current.fields.map((f) => (
-                  <div key={f.name} className="flex flex-col">
-                    <div className={labelBase} style={{ fontFamily: "Roboto, sans-serif" }}>
-                      {f.label}
+              <div className="flex flex-col gap-5">
+                <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
+                  {current.fields.map((f) => (
+                    <div key={f.name} className="flex flex-col">
+                      <div className={labelBase} style={{ fontFamily: "Roboto, sans-serif" }}>
+                        {f.label}
+                      </div>
+                      <input
+                        type={f.type}
+                        value={values[f.name]}
+                        onChange={(e) => setField(f.name, e.target.value)}
+                        placeholder={f.placeholder}
+                        className={inputBase}
+                        style={{ fontFamily: "Roboto, sans-serif" }}
+                      />
                     </div>
-                    <input
-                      type={f.type}
-                      value={values[f.name]}
-                      onChange={(e) => setField(f.name, e.target.value)}
-                      placeholder={f.placeholder}
-                      className={inputBase}
-                      style={{ fontFamily: "Roboto, sans-serif" }}
-                    />
-                  </div>
-                ))}
+                  ))}
+                </div>
+                <label className="flex items-start gap-3 text-[14px] text-[color:var(--c-text-strong)] sm:text-[15px]">
+                  <input
+                    type="checkbox"
+                    checked={isPolicyAccepted}
+                    onChange={(e) => setIsPolicyAccepted(e.target.checked)}
+                    className="mt-1 h-[18px] w-[18px] rounded border border-[color:var(--c-border-strong)] accent-[color:var(--c-primary)]"
+                  />
+                  <span style={{ fontFamily: "Roboto, sans-serif" }}>
+                    Согласен с{" "}
+                    <button
+                      type="button"
+                      onClick={() => setIsPolicyOpen(true)}
+                      className="text-[color:var(--c-primary)] underline underline-offset-2 transition hover:opacity-70"
+                    >
+                      политикой конфиденциальности
+                    </button>
+                  </span>
+                </label>
               </div>
             )}
           </div>
@@ -406,10 +433,12 @@ const Kviz = () => {
               <button
                 type="button"
                 onClick={handleSubmit}
-                disabled={!isStepValid() || isSubmitting}
+                disabled={!isStepValid() || isSubmitting || !isPolicyAccepted}
                 className={[
                   "rounded-md border border-[color:var(--c-primary)] bg-[color:var(--c-primary)] px-6 py-3 text-[18px] text-[color:var(--c-surface)] transition",
-                  !isStepValid() || isSubmitting ? "cursor-not-allowed opacity-50" : "hover:bg-[color:var(--c-primary-soft)]",
+                  !isStepValid() || isSubmitting || !isPolicyAccepted
+                    ? "cursor-not-allowed opacity-50"
+                    : "hover:bg-[color:var(--c-primary-soft)]",
                 ].join(" ")}
                 style={{ fontFamily: "Roboto, sans-serif" }}
               >
@@ -434,6 +463,10 @@ const Kviz = () => {
           )}
         </div>
       </div>
+      <PrivacyPolicyModal
+        open={isPolicyOpen}
+        onClose={() => setIsPolicyOpen(false)}
+      />
     </section>
   );
 };

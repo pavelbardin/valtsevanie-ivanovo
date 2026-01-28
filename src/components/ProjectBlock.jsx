@@ -11,25 +11,25 @@ const IMAGE_ALT = "Проект";
 
 const projects = [
   {
-    img: "https://picsum.photos/seed/project-1/360/360",
-    material: "Оцинкованная сталь 3 мм",
-    volume: "45 штук",
-    time: "2 дня",
-    city: "Кинешма",
+    img: "/Order/1.png",
+    material: "",
+    volume: "",
+    time: "",
+    city: "",
   },
   {
-    img: "https://picsum.photos/seed/project-2/360/360",
-    material: "Оцинкованная сталь 3 мм",
-    volume: "45 штук",
-    time: "2 дня",
-    city: "Кинешма",
+    img: "/Order/2.png",
+    material: "",
+    volume: "",
+    time: "",
+    city: "",
   },
   {
-    img: "https://picsum.photos/seed/project-3/360/360",
-    material: "Оцинкованная сталь 3 мм",
-    volume: "45 штук",
-    time: "2 дня",
-    city: "Кинешма",
+    img: "/Order/3.png",
+    material: "",
+    volume: "",
+    time: "",
+    city: "",
   },
 ];
 
@@ -37,7 +37,7 @@ const ProjectBlock = () => {
   const { open } = useModal();
 
   return (
-    <section id="projects" className="py-6 sm:py-6 xl:py-6">
+    <section id="projects" className="py-6 sm:py-6 xl:py-6 app-layout" >
       <div className="flex flex-col items-center text-center">
         <SectionTitle
           className="mb-8 xl:mb-12"

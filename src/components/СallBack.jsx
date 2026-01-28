@@ -1,15 +1,17 @@
 import { useState } from "react";
 import SectionTitle from "./ui/SectionTitle";
+import { sendForm } from "../api/forms";
+import PrivacyPolicyModal from "./PrivacyPolicyModal";
 
 const SECTION_TITLE = "Не нашли ответ на свой вопрос?";
 const SECTION_DESCRIPTION =
   "Оставьте контактные данные, а мы свяжемся с вами и ответим на вопросы";
-const INPUT_NAME_PLACEHOLDER = "Ваше имя";
-const INPUT_PHONE_PLACEHOLDER = "Телефон";
+const INPUT_NAME_PLACEHOLDER = "Ваше имя *";
+const INPUT_PHONE_PLACEHOLDER = "Телефон *";
 const BUTTON_SUBMIT_TEXT = "Отправить";
 const BUTTON_SENDING_TEXT = "Отправка...";
 const STATUS_SENDING_TEXT = "Отправка...";
-const STATUS_SUCCESS_TEXT = "Отправлено. Мы скоро свяжемся с вами.";
+const STATUS_SUCCESS_TEXT = "Спасибо, ваша заявка отправлена. Скоро с вами свяжемся.";
 const STATUS_ERROR_NO_KEY_TEXT =
   "Ошибка: ключ Web3Forms не найден (VITE_WEB3FORMS_KEY)";
 const STATUS_ERROR_DEFAULT_TEXT = "Ошибка отправки. Попробуйте позже.";
@@ -28,6 +30,8 @@ const FORM_ERROR_WITH_MESSAGE_TEMPLATE = (message) => `Ошибка: ${message}`
 const CallBack = () => {
   const [formValues, setFormValues] = useState({ name: "", phone: "" });
   const [status, setStatus] = useState({ type: "idle", text: "" });
+  const [isPolicyAccepted, setIsPolicyAccepted] = useState(false);
+  const [isPolicyOpen, setIsPolicyOpen] = useState(false);
 
   const handleChange = (field) => (event) => {
     setFormValues((prev) => ({ ...prev, [field]: event.target.value }));
@@ -35,36 +39,24 @@ const CallBack = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    const key = import.meta.env.VITE_WEB3FORMS_KEY;
-    if (!key) {
-      setStatus({ type: "error", text: STATUS_ERROR_NO_KEY_TEXT });
-      return;
-    }
+    if (!isPolicyAccepted) return;
 
     setStatus({ type: "sending", text: STATUS_SENDING_TEXT });
 
     try {
       const formData = new FormData();
-      formData.append("access_key", key);
       formData.append("subject", FORM_SUBJECT);
 
       formData.append("name", formValues.name);
       formData.append("phone", formValues.phone);
-
       formData.append(
         "message",
         FORM_MESSAGE_TEMPLATE(formValues.name, formValues.phone)
       );
 
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: formData,
-      });
+      const result = await sendForm(formData);
 
-      const data = await response.json();
-
-      if (response.ok && data.ok) {
+      if (result.ok) {
         setStatus({ type: "success", text: STATUS_SUCCESS_TEXT });
         setFormValues({ name: "", phone: "" });
         event.target.reset();
@@ -73,11 +65,13 @@ const CallBack = () => {
           setStatus({ type: "idle", text: "" });
         }, 3500);
       } else {
+        if (result.error === "missing_key") {
+          setStatus({ type: "error", text: STATUS_ERROR_NO_KEY_TEXT });
+          return;
+        }
         setStatus({
           type: "error",
-          text: data?.message
-            ? FORM_ERROR_WITH_MESSAGE_TEMPLATE(data.message)
-            : STATUS_ERROR_DEFAULT_TEXT,
+          text: result.error ? FORM_ERROR_WITH_MESSAGE_TEMPLATE(result.error) : STATUS_ERROR_DEFAULT_TEXT,
         });
       }
     } catch {
@@ -86,7 +80,7 @@ const CallBack = () => {
   };
 
   return (
-    <section className="py-12 sm:py-14 xl:py-16">
+    <section className="py-12 px-3 sm:py-14 xl:py-16 border-t border-[color:var(--c-border)]" >
       <div className="flex flex-col items-center text-center">
         <SectionTitle
           className="mb-3 text-[color:var(--c-text-strong)] xl:mb-4"
@@ -130,10 +124,10 @@ const CallBack = () => {
 
           <button
             type="submit"
-            disabled={status.type === "sending"}
+            disabled={status.type === "sending" || !isPolicyAccepted}
             className={[
               "w-full rounded-md border border-[color:var(--c-primary)] bg-[color:var(--c-primary)] px-6 py-3 text-[16px] text-[color:var(--c-surface)] transition hover:bg-[color:var(--c-primary-soft)] sm:text-[17px] xl:w-auto xl:text-[18px]",
-              status.type === "sending" ? "cursor-not-allowed opacity-70" : "",
+              status.type === "sending" || !isPolicyAccepted ? "cursor-not-allowed opacity-70" : "",
             ].join(" ")}
             style={{ fontFamily: "Roboto, sans-serif" }}
           >
@@ -142,6 +136,25 @@ const CallBack = () => {
               : BUTTON_SUBMIT_TEXT}
           </button>
         </form>
+
+        <label className="mt-4 flex items-start gap-3 text-[14px] text-[color:var(--c-text-strong)] sm:text-[15px]">
+          <input
+            type="checkbox"
+            checked={isPolicyAccepted}
+            onChange={(e) => setIsPolicyAccepted(e.target.checked)}
+            className="mt-1 h-[18px] w-[18px] rounded border border-[color:var(--c-border-strong)] accent-[color:var(--c-primary)]"
+          />
+          <span style={{ fontFamily: "Roboto, sans-serif" }}>
+            Согласен с{" "}
+            <button
+              type="button"
+              onClick={() => setIsPolicyOpen(true)}
+              className="text-[color:var(--c-primary)] underline underline-offset-2 transition hover:opacity-70"
+            >
+              политикой конфиденциальности
+            </button>
+          </span>
+        </label>
 
         {status.text ? (
           <div
@@ -159,6 +172,10 @@ const CallBack = () => {
           </div>
         ) : null}
       </div>
+      <PrivacyPolicyModal
+        open={isPolicyOpen}
+        onClose={() => setIsPolicyOpen(false)}
+      />
     </section>
   );
 };

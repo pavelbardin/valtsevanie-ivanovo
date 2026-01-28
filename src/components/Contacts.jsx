@@ -25,7 +25,6 @@ const Contacts = () => {
   return (
     <section id="contacts" className="py-12 sm:py-14 xl:py-16">
       <div className="mx-auto grid w-full max-w-[1400px] grid-cols-1 gap-8 px-4 sm:px-6 xl:grid-cols-2 xl:gap-12">
-        {/* левая половина*/}
         <div className="flex flex-col justify-center gap-8 text-[color:var(--c-text-strong)] xl:gap-10">
           <div className="flex items-center gap-6">
             <div className="flex h-[56px] w-[56px] items-center justify-center rounded-full bg-[color:var(--c-surface-soft)] text-[20px] text-[color:var(--c-text)] sm:h-[60px] sm:w-[60px] sm:text-[22px] xl:h-[66px] xl:w-[66px] xl:text-[22px]">
@@ -72,7 +71,6 @@ const Contacts = () => {
             </a>
           </div>
         </div>
-        {/* правая часть */}
         <div className="h-[280px] w-full overflow-hidden rounded-md sm:h-[340px] md:h-[380px] xl:h-[420px]">
           <iframe
             title={MAP_TITLE}

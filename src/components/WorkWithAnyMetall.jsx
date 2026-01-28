@@ -22,7 +22,7 @@ const WorkWithAnyMetall = () => {
   const [lightboxIndex, setLightboxIndex] = useState(0);
 
   return (
-    <section className="py-12 sm:py-14 xl:py-16">
+    <section className="py-12 sm:py-14 xl:py-16 px-4">
       <SectionTitle className="mb-8 xl:mb-10" style={{ fontFamily: "Roboto, sans-serif" }}>
         {SECTION_TITLE}
       </SectionTitle>

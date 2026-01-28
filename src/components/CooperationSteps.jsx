@@ -35,12 +35,11 @@ const STEPS = [
   },
 ];
 
-// === STYLE CONSTANTS ===
 const SLOT_H = 150;
 const CIRCLE = 86;
 const LINE_H = 2;
 
-// === COMPONENTS ===
+
 function StepText({ titleLines, subtitleLines, active }) {
   return (
     <div className="flex flex-col items-center text-center">
@@ -103,12 +102,11 @@ function StepCell({ children }) {
   );
 }
 
-// === MAIN COMPONENT ===
 export default function CooperationSteps() {
   const [activeId, setActiveId] = useState(null);
 
   return (
-    <section className="w-full bg-white font-sans py-10 sm:py-12 xl:pt-[56px] xl:pb-[72px]">
+    <section className="w-full bg-white font-sans py-10 sm:py-12 xl:pt-[56px] xl:pb-[72px] app-layout">
       <div className="mx-auto w-full max-w-[1480px] px-[24px]">
         <h2
           className="mb-8 text-center text-[26px] font-bold text-[color:var(--c-text-strong)] sm:text-[32px] md:text-[36px] xl:mb-[56px] xl:text-[44px]"
@@ -117,7 +115,6 @@ export default function CooperationSteps() {
           {SECTION_TITLE}
         </h2>
 
-        {/* Desktop layout */}
         <div className="hidden xl:block">
           <StepsRow>
             {STEPS.map((s) => (
@@ -181,7 +178,6 @@ export default function CooperationSteps() {
           </StepsRow>
         </div>
 
-        {/* Mobile layout */}
         <div className="xl:hidden">
           <div className="mx-auto w-full max-w-[680px] px-2 sm:px-6">
             <div className="relative">

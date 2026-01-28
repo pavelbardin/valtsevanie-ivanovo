@@ -17,12 +17,12 @@ const PROCESS_STEPS = [
   },
 ];
 
-const PROCESS_IMAGE_SRC = "https://picsum.photos/seed/valz-process/800/600";
+const PROCESS_IMAGE_SRC = "/process.png";
 const PROCESS_IMAGE_ALT = "Процесс вальцевания";
 
 const ValzProcess = () => {
   return (
-    <section className="py-12 sm:py-14 xl:py-16">
+    <section className="py-12 sm:py-14 xl:py-16 app-layout">
       <div className="flex flex-col">
         <SectionTitle
           className="mb-8 xl:mb-12"

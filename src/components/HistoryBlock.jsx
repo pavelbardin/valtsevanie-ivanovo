@@ -1,4 +1,6 @@
-const IMAGE_SRC = "/History.jpg";
+import SectionTitle from "./ui/SectionTitle";
+
+const IMAGE_SRC = "/History.png";
 const IMAGE_ALT = "История компании";
 
 const HISTORY_PARAGRAPH_1 =
@@ -12,11 +14,17 @@ const HISTORY_PARAGRAPH_3 =
 
 const HistoryBlock = () => {
   return (
-    <section id="about" className="py-12 sm:py-14 xl:py-16">
+    <section id="about" className="py-4 sm:py-6 xl:py-8 app-layout">
+      <SectionTitle
+        className="mb-8 xl:mb-10"
+        style={{ fontFamily: "Roboto, sans-serif" }}
+      >
+        Наша история
+      </SectionTitle>
+
       <div className="flex flex-col-reverse gap-6 xl:flex-row xl:gap-10">
 
-        {/* левая часть - картинка */}
-        <div className="h-[240px] w-full sm:h-[320px] md:h-[360px] xl:h-[393px] xl:w-1/2">
+        <div className="hidden xl:flex xl:h-[393px] xl:w-1/2">
           <img
             src={IMAGE_SRC}
             alt={IMAGE_ALT}
@@ -25,7 +33,6 @@ const HistoryBlock = () => {
           />
         </div>
 
-        {/* справа история */}
         <div className="w-full xl:h-[393px] xl:w-1/2">
           <div
             className="flex h-full items-center rounded-md bg-white px-6 py-6 sm:px-8 sm:py-8 xl:px-10 xl:py-10"
@@ -50,4 +57,3 @@ const HistoryBlock = () => {
 };
 
 export default HistoryBlock;
-
