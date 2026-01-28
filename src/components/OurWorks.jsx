@@ -2,9 +2,22 @@ import { useMemo } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import SectionTitle from "./ui/SectionTitle";
+import slider1 from "../assets/slider/1.png";
+import slider2 from "../assets/slider/2.png";
+import slider3 from "../assets/slider/3.png";
+import slider4 from "../assets/slider/4.png";
 
 const SECTION_TITLE = "Металлы с которыми мы работаем";
-const SLIDE_IMAGES = ["/slider/1.png", "/slider/2.png", "/slider/3.png", "/slider/4.png","/slider/1.png", "/slider/2.png", "/slider/3.png", "/slider/4.png"];
+const SLIDE_IMAGES = [
+  slider1,
+  slider2,
+  slider3,
+  slider4,
+  slider1,
+  slider2,
+  slider3,
+  slider4,
+];
 const ALT_TEXT_PREFIX = "Работа";
 
 const OurWorks = () => {

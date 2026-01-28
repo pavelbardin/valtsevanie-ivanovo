@@ -1,5 +1,8 @@
 import { useModal } from "./useModal";
 import SectionTitle from "./ui/SectionTitle";
+import order1 from "../assets/order/1.png";
+import order2 from "../assets/order/2.png";
+import order3 from "../assets/order/3.png";
 
 const SECTION_TITLE = "У нас можно заказать";
 const CARD_TITLE = "Продукт №1";
@@ -15,17 +18,17 @@ const cards = [
   {
     title: CARD_TITLE,
     price: CARD_PRICE_PLACEHOLDER,
-    img: "/Order/1.png",
+    img: order1,
   },
   {
     title: CARD_TITLE2,
     price: CARD_PRICE_PLACEHOLDER2,
-    img: "/Order/2.png",
+    img: order2,
   },
   {
     title: CARD_TITLE3,
     price: CARD_PRICE_PLACEHOLDER3,
-    img: "/Order/3.png",
+    img: order3,
   },
 ];
 

@@ -1,6 +1,7 @@
 import SectionTitle from "./ui/SectionTitle";
+import historyImage from "../assets/History.png";
 
-const IMAGE_SRC = "/History.png";
+const IMAGE_SRC = historyImage;
 const IMAGE_ALT = "История компании";
 
 const HISTORY_PARAGRAPH_1 =

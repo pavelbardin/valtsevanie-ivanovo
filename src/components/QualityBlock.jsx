@@ -1,4 +1,7 @@
 import SectionTitle from "./ui/SectionTitle";
+import icon1 from "../assets/icons/1.png";
+import icon2 from "../assets/icons/2.png";
+import icon3 from "../assets/icons/3.png";
 
 const SECTION_TITLE = "Мы отвечаем за качество нашей продукции";
 
@@ -6,18 +9,18 @@ const QUALITY_ITEMS = [
   {
     title: "Предприятию более 50 лет",
     subtitle: "Входим в список лучших подрядчиков России",
-    icon: "/icons/1.png",
+    icon: icon1,
   },
   {
     title: "Огромная производственная площадь",
     subtitle: "Проектируем, строим и проводим монтаж объектов любых размеров и сложности.",
-    icon: "/icons/2.png",
+    icon: icon2,
   },
   {
     title: "Допуск СРО",
     subtitle:
       "Построили самые разные объекты для государства и лидеров рынка, таких как «Технониколь», «Лукойл», «Газпром»",
-    icon: "/icons/3.png",
+    icon: icon3,
   },
 ];
 

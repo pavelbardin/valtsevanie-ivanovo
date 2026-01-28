@@ -1,4 +1,5 @@
 import SectionTitle from "./ui/SectionTitle";
+import processImage from "../assets/process.png";
 
 const SECTION_TITLE = "Как происходит процесс вальцевания";
 
@@ -17,7 +18,7 @@ const PROCESS_STEPS = [
   },
 ];
 
-const PROCESS_IMAGE_SRC = "/process.png";
+const PROCESS_IMAGE_SRC = processImage;
 const PROCESS_IMAGE_ALT = "Процесс вальцевания";
 
 const ValzProcess = () => {

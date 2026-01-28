@@ -1,4 +1,5 @@
 import { useModal } from "./useModal";
+import heroImage from "../assets/welcomePage.png";
 
 const HEADING =
   "Вальцевание металла под ключ в Иваново и области за 2 дня";
@@ -32,7 +33,7 @@ const WelcomeBlock = () => {
         xl:min-h-[700px]
       "
       style={{
-        backgroundImage: "url('/welcomePage.png')",
+        backgroundImage: `url(${heroImage})`,
       }}
     >
       <div

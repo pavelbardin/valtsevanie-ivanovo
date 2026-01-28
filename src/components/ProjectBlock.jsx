@@ -1,5 +1,8 @@
 import { useModal } from "./useModal";
 import SectionTitle from "./ui/SectionTitle";
+import order1 from "../assets/order/1.png";
+import order2 from "../assets/order/2.png";
+import order3 from "../assets/order/3.png";
 
 const SECTION_TITLE = "Проекты, которые мы уже реализовали";
 const MATERIAL_LABEL = "Материал:";
@@ -11,21 +14,21 @@ const IMAGE_ALT = "Проект";
 
 const projects = [
   {
-    img: "/Order/1.png",
+    img: order1,
     material: "",
     volume: "",
     time: "",
     city: "",
   },
   {
-    img: "/Order/2.png",
+    img: order2,
     material: "",
     volume: "",
     time: "",
     city: "",
   },
   {
-    img: "/Order/3.png",
+    img: order3,
     material: "",
     volume: "",
     time: "",
