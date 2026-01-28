@@ -1,12 +1,10 @@
 import Contacts from "./components/Contacts";
 import CooperationSteps from "./components/CooperationSteps";
-import CountPrice from "./components/CountPrice";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import HistoryBlock from "./components/HistoryBlock";
 import Kviz from "./components/Kviz";
 import OurWorks from "./components/OurWorks";
-import ProjectBlock from "./components/ProjectBlock";
 import QABlock from "./components/QABlock";
 import QualityBlock from "./components/QualityBlock";
 import ValzProcess from "./components/ValzProcess";
@@ -22,12 +20,11 @@ function App() {
         <Header />
         <WelcomeBlock />
         <QualityBlock />
-        <YouCanOrdetBlock />
         <OurWorks/>
+                <YouCanOrdetBlock />
         <Kviz />
         <ValzProcess />
         <HistoryBlock />
-        <ProjectBlock />
         <CooperationSteps />
         <QABlock />
         <Contacts />

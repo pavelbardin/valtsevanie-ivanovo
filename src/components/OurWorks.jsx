@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
+import { Autoplay, Navigation } from "swiper/modules";
 import SectionTitle from "./ui/SectionTitle";
 import slider1 from "../assets/slider/1.webp";
 import slider2 from "../assets/slider/2.webp";
@@ -41,9 +41,14 @@ const OurWorks = () => {
 
       <div className="w-full select-none">
         <Swiper
-          modules={[Navigation]}
-          navigation
+          modules={[Autoplay, Navigation]}
           loop
+          autoplay={{
+            delay: 0,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: false,
+          }}
+          speed={8000}
           slidesPerView="auto"
           spaceBetween={16}
           watchOverflow
@@ -63,7 +68,7 @@ const OurWorks = () => {
                   group
                   relative
                   overflow-hidden
-                  rounded-sm
+                  rounded-full
                   transition
                   duration-300
                 "
@@ -76,6 +81,7 @@ const OurWorks = () => {
                   decoding="async"
                   className="
                     w-[192px] h-[192px]
+                    rounded-full
                     object-cover
                     transition
                     duration-300

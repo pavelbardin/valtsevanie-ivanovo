@@ -1,4 +1,4 @@
-import { FaMapMarkerAlt, FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
+import { FaMapMarkerAlt } from "react-icons/fa";
 import { useModal } from "./useModal";
 import logo from "../../logo/logo.png";
 
@@ -18,14 +18,6 @@ const NAV_LINKS = [
   { href: "#qa", label: "Вопросы" },
   { href: "#contacts", label: "Контакты" },
 ];
-
-const MESSENGERS_LABEL = "Мессенджеры";
-
-const TELEGRAM_HREF = "https://t.me/your_username";
-const TELEGRAM_ARIA_LABEL = "Telegram";
-
-const WHATSAPP_HREF = "https://wa.me/0000000000";
-const WHATSAPP_ARIA_LABEL = "WhatsApp";
 
 const ADDRESS_TEXT = "г. Иваново, Торфяной переулок, д. 65";
 
@@ -84,34 +76,6 @@ const Footer = () => {
           >
             {EMAIL_ADDRESS}
           </a>
-          <div className="flex items-center gap-3 sm:gap-4">
-            <span
-              className="text-[16px] sm:text-[17px] xl:text-[18px]"
-              style={{ fontFamily: "Roboto, sans-serif" }}
-            >
-              {MESSENGERS_LABEL}
-            </span>
-            <div className="flex items-center gap-3 text-[18px] sm:text-[19px] xl:text-[20px]">
-              <a
-                href={TELEGRAM_HREF}
-                target="_blank"
-                rel="noreferrer"
-                className="transition hover:opacity-70"
-                aria-label={TELEGRAM_ARIA_LABEL}
-              >
-                <FaTelegramPlane />
-              </a>
-              <a
-                href={WHATSAPP_HREF}
-                target="_blank"
-                rel="noreferrer"
-                className="transition hover:opacity-70"
-                aria-label={WHATSAPP_ARIA_LABEL}
-              >
-                <FaWhatsapp />
-              </a>
-            </div>
-          </div>
           <div
             className="flex items-center gap-2 text-[16px] sm:text-[17px] xl:text-[18px]"
             style={{ fontFamily: "Roboto, sans-serif" }}

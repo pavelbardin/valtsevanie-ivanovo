@@ -1,13 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
 import { useModal } from "./useModal";
 import logo from "../../logo/logo.png";
-
-const TELEGRAM_HREF = "https://t.me/your_username";
-const TELEGRAM_ARIA_LABEL = "Telegram";
-
-const WHATSAPP_HREF = "https://wa.me/0000000000";
-const WHATSAPP_ARIA_LABEL = "WhatsApp";
 
 const PHONE_NUMBER = "8(4932)29-59-97";
 const PHONE_HREF = "tel:+74932295997";
@@ -84,29 +77,8 @@ const Header = () => {
               </div>
 
               <div className="hidden xl:flex items-center gap-6 self-center">
-                <div className="flex items-center gap-5 text-[24px]">
-                  <a
-                    href={TELEGRAM_HREF}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="transition hover:text-[color:var(--c-primary)] hover:drop-shadow-[0_2px_6px_var(--c-shadow)]"
-                    aria-label={TELEGRAM_ARIA_LABEL}
-                  >
-                    <FaTelegramPlane />
-                  </a>
-                  <a
-                    href={WHATSAPP_HREF}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="transition hover:text-[color:var(--c-primary)] hover:drop-shadow-[0_2px_6px_var(--c-shadow)]"
-                    aria-label={WHATSAPP_ARIA_LABEL}
-                  >
-                    <FaWhatsapp />
-                  </a>
-                </div>
-
                 <div
-                  className="flex flex-col items-start leading-tight text-[14px] font-medium"
+                  className="flex flex-col items-start leading-tight text-[16px] font-medium xl:text-[18px]"
                   style={{ fontFamily: "Manrope, sans-serif" }}
                 >
                   <a
@@ -126,7 +98,7 @@ const Header = () => {
                 <button
                   type="button"
                   onClick={open}
-                  className="border-0 bg-[color:var(--c-primary)] px-5 py-1.5 text-[14px] font-normal text-[color:var(--c-surface)] transition hover:bg-[color:var(--c-primary-soft)]"
+                  className="border-0 bg-[color:var(--c-primary)] px-6 py-2 text-[16px] font-normal text-[color:var(--c-surface)] transition hover:bg-[color:var(--c-primary-soft)] xl:text-[17px]"
                   style={{ fontFamily: "Roboto, sans-serif" }}
                 >
                   {BUTTON_CALLBACK_TEXT}
@@ -135,7 +107,7 @@ const Header = () => {
 
               <div className="xl:hidden flex items-center gap-4 self-center">
                 <div
-                  className="hidden min-[450px]:flex flex-col items-start leading-tight text-[12px] font-medium sm:text-[13px]"
+                  className="hidden min-[450px]:flex flex-col items-start leading-tight text-[12px] font-medium sm:text-[15px] md:text-[16px]"
                   style={{ fontFamily: "Manrope, sans-serif" }}
                 >
                   <a
@@ -155,7 +127,7 @@ const Header = () => {
                 <button
                   type="button"
                   onClick={open}
-                  className="border-0 bg-[color:var(--c-primary)] px-4 py-1.5 text-[12px] font-normal text-[color:var(--c-surface)] transition hover:bg-[color:var(--c-primary-soft)] sm:text-[13px]"
+                  className="border-0 bg-[color:var(--c-primary)] px-4 py-1.5 text-[12px] font-normal text-[color:var(--c-surface)] transition hover:bg-[color:var(--c-primary-soft)] sm:px-5 sm:py-2 sm:text-[15px] md:text-[16px]"
                   style={{ fontFamily: "Roboto, sans-serif" }}
                 >
                   {BUTTON_CALLBACK_TEXT}
@@ -238,29 +210,8 @@ const Header = () => {
                     </div>
 
                     <div className="mt-6 border-t border-[color:var(--c-border)] pt-4">
-                      <div className="flex items-center gap-5 text-[26px]">
-                        <a
-                          href={TELEGRAM_HREF}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="transition hover:text-[color:var(--c-primary)]"
-                          aria-label={TELEGRAM_ARIA_LABEL}
-                        >
-                          <FaTelegramPlane />
-                        </a>
-                        <a
-                          href={WHATSAPP_HREF}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="transition hover:text-[color:var(--c-primary)]"
-                          aria-label={WHATSAPP_ARIA_LABEL}
-                        >
-                          <FaWhatsapp />
-                        </a>
-                      </div>
-
                       <div
-                        className="mt-3 flex flex-col leading-tight text-[15px] font-medium"
+                        className="flex flex-col leading-tight text-[15px] font-medium"
                         style={{ fontFamily: "Manrope, sans-serif" }}
                       >
                         <a

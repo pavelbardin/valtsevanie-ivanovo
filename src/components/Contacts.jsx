@@ -1,17 +1,11 @@
 import { useEffect, useState } from "react";
-import { FaEnvelope, FaPhoneAlt, FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
+import { FaEnvelope, FaPhoneAlt } from "react-icons/fa";
 
 const PHONE_NUMBER = "8(4932)29-59-97";
 const PHONE_HREF = "tel:+74932295997";
 
 const EMAIL_ADDRESS = "stal-ivanovo@rambler.ru";
 const EMAIL_HREF = "mailto:stal-ivanovo@rambler.ru";
-
-const WHATSAPP_HREF = "https://wa.me/0000000000";
-const WHATSAPP_ARIA_LABEL = "WhatsApp";
-
-const TELEGRAM_HREF = "https://t.me/your_username";
-const TELEGRAM_ARIA_LABEL = "Telegram";
 
 const MAP_TITLE = "Map";
 const MAP_SRC =
@@ -55,26 +49,6 @@ const Contacts = () => {
               style={{ fontFamily: "Roboto, sans-serif" }}
             >
               {EMAIL_ADDRESS}
-            </a>
-          </div>
-          <div className="flex items-center gap-6 pt-4">
-            <a
-              href={WHATSAPP_HREF}
-              target="_blank"
-              rel="noreferrer"
-              className="flex h-[56px] w-[56px] items-center justify-center rounded-full bg-[color:var(--c-surface-soft)] text-[22px] text-[color:var(--c-text)] transition hover:scale-105 sm:h-[60px] sm:w-[60px] sm:text-[24px] xl:h-[66px] xl:w-[66px] xl:text-[24px]"
-              aria-label={WHATSAPP_ARIA_LABEL}
-            >
-              <FaWhatsapp />
-            </a>
-            <a
-              href={TELEGRAM_HREF}
-              target="_blank"
-              rel="noreferrer"
-              className="flex h-[56px] w-[56px] items-center justify-center rounded-full bg-[color:var(--c-surface-soft)] text-[22px] text-[color:var(--c-text)] transition hover:scale-105 sm:h-[60px] sm:w-[60px] sm:text-[24px] xl:h-[66px] xl:w-[66px] xl:text-[24px]"
-              aria-label={TELEGRAM_ARIA_LABEL}
-            >
-              <FaTelegramPlane />
             </a>
           </div>
         </div>
