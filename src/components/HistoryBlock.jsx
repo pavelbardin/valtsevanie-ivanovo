@@ -1,5 +1,5 @@
 import SectionTitle from "./ui/SectionTitle";
-import historyImage from "../assets/History.png";
+import historyImage from "../assets/History.webp";
 
 const IMAGE_SRC = historyImage;
 const IMAGE_ALT = "История компании";
@@ -31,6 +31,8 @@ const HistoryBlock = () => {
             alt={IMAGE_ALT}
             className="h-full w-full rounded-md object-cover"
             draggable={false}
+            loading="lazy"
+            decoding="async"
           />
         </div>
 

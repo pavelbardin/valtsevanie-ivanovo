@@ -1,8 +1,8 @@
 import { useModal } from "./useModal";
 import SectionTitle from "./ui/SectionTitle";
-import order1 from "../assets/order/1.png";
-import order2 from "../assets/order/2.png";
-import order3 from "../assets/order/3.png";
+import order1 from "../assets/order/1.webp";
+import order2 from "../assets/order/2.webp";
+import order3 from "../assets/order/3.webp";
 
 const SECTION_TITLE = "Проекты, которые мы уже реализовали";
 const MATERIAL_LABEL = "Материал:";
@@ -60,6 +60,8 @@ const ProjectBlock = () => {
                 alt={IMAGE_ALT}
                 className="mb-4 h-[240px] w-full object-cover rounded-md sm:h-[280px] md:h-[320px] xl:h-[360px] xl:w-[360px]"
                 draggable={false}
+                loading="lazy"
+                decoding="async"
               />
               <div
                 className="text-[16px] font-normal leading-relaxed sm:text-[18px] xl:text-[20px]"

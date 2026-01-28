@@ -1,7 +1,7 @@
 import SectionTitle from "./ui/SectionTitle";
-import icon1 from "../assets/icons/1.png";
-import icon2 from "../assets/icons/2.png";
-import icon3 from "../assets/icons/3.png";
+import icon1 from "../assets/icons/1.webp";
+import icon2 from "../assets/icons/2.webp";
+import icon3 from "../assets/icons/3.webp";
 
 const SECTION_TITLE = "Мы отвечаем за качество нашей продукции";
 
@@ -47,6 +47,8 @@ const QualityBlock = () => {
                   alt=""
                   className="h-[80px] w-[80px] max-w-none max-h-none object-contain sm:h-[92px] sm:w-[92px] xl:h-[104px] xl:w-[104px]"
                   draggable={false}
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
               <div>

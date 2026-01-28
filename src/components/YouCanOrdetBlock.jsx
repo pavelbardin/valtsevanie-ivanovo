@@ -1,8 +1,8 @@
 import { useModal } from "./useModal";
 import SectionTitle from "./ui/SectionTitle";
-import order1 from "../assets/order/1.png";
-import order2 from "../assets/order/2.png";
-import order3 from "../assets/order/3.png";
+import order1 from "../assets/order/1.webp";
+import order2 from "../assets/order/2.webp";
+import order3 from "../assets/order/3.webp";
 
 const SECTION_TITLE = "У нас можно заказать";
 const CARD_TITLE = "Продукт №1";
@@ -55,6 +55,8 @@ const YouCanOrdetBlock = () => {
                 alt={card.title}
                 className="mb-4 h-[280px] w-full object-cover sm:h-[320px] md:h-[360px] xl:h-[400px] xl:w-[360px]"
                 draggable={false}
+                loading="lazy"
+                decoding="async"
               />
               <div
                 className="mb-2 text-[18px] font-semibold sm:text-[19px] xl:text-[20px]"

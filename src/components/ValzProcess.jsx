@@ -1,5 +1,5 @@
 import SectionTitle from "./ui/SectionTitle";
-import processImage from "../assets/process.png";
+import processImage from "../assets/process.webp";
 
 const SECTION_TITLE = "Как происходит процесс вальцевания";
 
@@ -58,6 +58,8 @@ const ValzProcess = () => {
               alt={PROCESS_IMAGE_ALT}
               className="w-full h-full object-cover rounded-md"
               draggable={false}
+              loading="lazy"
+              decoding="async"
             />
           </div>
         </div>
