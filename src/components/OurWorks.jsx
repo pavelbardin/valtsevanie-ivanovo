@@ -31,7 +31,7 @@ const OurWorks = () => {
   );
 
   return (
-    <section className="py-12 sm:py-14 xl:py-16 px-4">
+    <section className="py-12 sm:py-14 xl:py-16 ">
       <SectionTitle
         className="mb-8 xl:mb-10"
         style={{ fontFamily: "Roboto, sans-serif" }}
