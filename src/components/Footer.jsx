@@ -5,8 +5,8 @@ import logo from "../../logo/logo.png";
 const PHONE_NUMBER = "8(4932)29-59-97";
 const PHONE_HREF = "tel:+74932295997";
 
-const EMAIL_ADDRESS = "stal-ivanovo@rambler.ru";
-const EMAIL_HREF = "mailto:stal-ivanovo@rambler.ru";
+const EMAIL_ADDRESS = "dir.stal@mail.ru";
+const EMAIL_HREF = "mailto:dir.stal@mail.ru";
 
 const BUTTON_TEXT = "Получить консультацию";
 
