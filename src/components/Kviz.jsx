@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import SectionTitle from "./ui/SectionTitle";
 import { sendForm } from "../api/forms";
 import PrivacyPolicyModal from "./PrivacyPolicyModal";
+import { reachGoal } from "../utils/metrika";
 
 const TEXT_COLOR = "var(--c-text-strong)";
 
@@ -19,6 +20,7 @@ const STATUS_ERROR_NO_KEY_TEXT =
 const STATUS_ERROR_DEFAULT_TEXT = "Ошибка отправки. Попробуйте позже.";
 const STATUS_ERROR_WITH_MESSAGE = (message) => `Ошибка: ${message}`;
 const FORM_SUBJECT = "Новая заявка из квиза";
+const STEP_GOALS = ["step1", "step2", "step3", "step4"];
 const FORM_MESSAGE_TEMPLATE = (values) => `
 Заявка с квиза по вальцовке
 
@@ -201,6 +203,7 @@ const Kviz = () => {
   const [values, setValues] = useState(INITIAL_VALUES);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState({ type: "idle", text: "" });
+  const [, setStepsReached] = useState(() => new Set());
   const [isPolicyAccepted, setIsPolicyAccepted] = useState(false);
   const [isPolicyOpen, setIsPolicyOpen] = useState(false);
 
@@ -211,7 +214,23 @@ const Kviz = () => {
     setValues((prev) => ({ ...prev, [name]: next }));
   };
 
+  const trackStepGoal = (index) => {
+    const goal = STEP_GOALS[index];
+    if (!goal) return;
+
+    setStepsReached((prev) => {
+      if (prev.has(goal)) return prev;
+      const next = new Set(prev);
+      next.add(goal);
+      reachGoal(goal);
+      return next;
+    });
+  };
+
   const goNext = () => {
+    if (isStepValid()) {
+      trackStepGoal(stepIndex);
+    }
     setStepIndex((prev) => Math.min(prev + 1, steps.length - 1));
   };
 
@@ -261,9 +280,12 @@ const Kviz = () => {
       const result = await sendForm(formData);
 
       if (result.ok) {
+        reachGoal("kviz");
+        reachGoal("all");
         setSubmitStatus({ type: "success", text: STATUS_SUCCESS_TEXT });
         setStepIndex(0);
         setValues(INITIAL_VALUES);
+        setStepsReached(new Set());
         window.setTimeout(() => setSubmitStatus({ type: "idle", text: "" }), 3500);
       } else {
         if (result.error === "missing_key") {

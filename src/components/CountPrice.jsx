@@ -2,6 +2,7 @@ import { useState } from "react";
 import SectionTitle from "./ui/SectionTitle";
 import { sendForm } from "../api/forms";
 import PrivacyPolicyModal from "./PrivacyPolicyModal";
+import { reachGoal } from "../utils/metrika";
 
 const SECTION_TITLE = "Рассчитаем стоимость изготовления по вашему чертежу";
 
@@ -80,6 +81,7 @@ const CountPrice = () => {
         return;
       }
 
+      reachGoal("all");
       setStatus(STATUS_SUCCESS_TEXT);
       setFormValues({ name: "", phone: "" });
       setFile(null);

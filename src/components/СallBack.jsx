@@ -2,6 +2,7 @@ import { useState } from "react";
 import SectionTitle from "./ui/SectionTitle";
 import { sendForm } from "../api/forms";
 import PrivacyPolicyModal from "./PrivacyPolicyModal";
+import { reachGoal } from "../utils/metrika";
 
 const SECTION_TITLE = "Не нашли ответ на свой вопрос?";
 const SECTION_DESCRIPTION =
@@ -57,6 +58,8 @@ const CallBack = () => {
       const result = await sendForm(formData);
 
       if (result.ok) {
+        reachGoal("zvonok");
+        reachGoal("all");
         setStatus({ type: "success", text: STATUS_SUCCESS_TEXT });
         setFormValues({ name: "", phone: "" });
         event.target.reset();

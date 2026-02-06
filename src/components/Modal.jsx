@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { sendForm } from "../api/forms";
+import { reachGoal } from "../utils/metrika";
 import PrivacyPolicyModal from "./PrivacyPolicyModal";
 
 const MODAL_TITLE = "Оставьте заявку";
@@ -55,6 +56,7 @@ const Modal = ({ open, onClose }) => {
     try {
       const result = await sendForm(formData);
       if (result.ok) {
+        reachGoal("all");
         setStatus(STATUS_SUCCESS);
         setFormValues({ name: "", phone: "", email: "", question: "" });
 

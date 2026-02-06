@@ -21,7 +21,7 @@ function App() {
         <WelcomeBlock />
         <QualityBlock />
         <OurWorks/>
-                <YouCanOrdetBlock />
+        <YouCanOrdetBlock />
         <Kviz />
         <ValzProcess />
         <HistoryBlock />
