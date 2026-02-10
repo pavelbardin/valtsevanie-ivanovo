@@ -18,10 +18,7 @@ const CARD_TITLE = "Листовая гибка";
 const CARD_TITLE2 = "Гибка труб и профиля";
 const CARD_TITLE3 = "Радиусная гибка";
 const CARD_TITLE4 = "Объемная гибка (формоизменение)";
-const CARD_PRICE_PLACEHOLDER = "Цена от ...";
-const CARD_PRICE_PLACEHOLDER2= "Цена от ...";
-const CARD_PRICE_PLACEHOLDER3 = "Цена от ...";
-const CARD_PRICE_PLACEHOLDER4 = "Цена от ...";
+
 const BUTTON_CALCULATE_PRICE = "Рассчитать цену";
 const BUTTON_ASK_QUESTION = "Задать вопрос";
 const CARD_IMAGE_SIZES =
@@ -30,25 +27,21 @@ const CARD_IMAGE_SIZES =
 const cards = [
   {
     title: CARD_TITLE,
-    price: CARD_PRICE_PLACEHOLDER,
     img: order1_720,
     srcSet: `${order1_480} 480w, ${order1_720} 720w, ${order1_960} 960w`,
   },
     {
     title: CARD_TITLE4,
-    price: CARD_PRICE_PLACEHOLDER4,
     img: order4_720,
     srcSet: `${order4_480} 480w, ${order4_720} 720w, ${order4_960} 960w`,
   },
   {
     title: CARD_TITLE2,
-    price: CARD_PRICE_PLACEHOLDER2,
     img: order2_720,
     srcSet: `${order2_480} 480w, ${order2_720} 720w, ${order2_960} 960w`,
   },
   {
     title: CARD_TITLE3,
-    price: CARD_PRICE_PLACEHOLDER3,
     img: order3_720,
     srcSet: `${order3_480} 480w, ${order3_720} 720w, ${order3_960} 960w`,
   },
@@ -91,12 +84,6 @@ const YouCanOrdetBlock = () => {
                 style={{ fontFamily: "Roboto, sans-serif" }}
               >
                 {card.title}
-              </div>
-              <div
-                className="mb-4 text-[16px] font-normal sm:text-[17px] xl:text-[18px]"
-                style={{ fontFamily: "Roboto, sans-serif" }}
-              >
-                {card.price}
               </div>
               <div className="flex flex-col gap-3 sm:flex-row sm:gap-[20px]">
                 <button
