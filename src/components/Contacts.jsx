@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { FaEnvelope, FaPhoneAlt } from "react-icons/fa";
 
-const PHONE_NUMBER = "+7(903)-888-71-03";
+const PHONE_NUMBER = "+7(903)-888-71-07";
 const PHONE_HREF = "tel:+79038887107";
 
 const EMAIL_ADDRESS = "dir.stal@mail.ru";
