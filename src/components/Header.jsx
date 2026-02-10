@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { useModal } from "./useModal";
 import logo from "../../logo/logo.png";
 
-const PHONE_NUMBER = "8(4932)29-59-97";
-const PHONE_HREF = "tel:+74932295997";
+const PHONE_NUMBER = "+7(903)-888-71-03";
+const PHONE_HREF = "tel:+79038887103";
 
 const EMAIL_ADDRESS = "dir.stal@mail.ru";
 const EMAIL_HREF = "mailto:dir.stal@mail.ru";
