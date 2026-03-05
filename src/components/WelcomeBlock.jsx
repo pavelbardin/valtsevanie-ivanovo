@@ -2,7 +2,7 @@ import { useModal } from "./useModal";
 import heroImage from "../assets/welcomePage.webp";
 
 const HEADING =
-  "Вальцевание металла под ключ в Иваново и области за 2 дня";
+  "Вальцевание металла под ключ за 2 дня с точностью до мм";
 
 const SUBTEXT =
   "Изготавливаем конструкции по  чертежам заказчика или разрабатываем их с нуля";
